@@ -1,0 +1,103 @@
+
+import java.util.ArrayList;
+
+public class hw5{
+
+    public static void main(String[] args){
+
+        String text=  "Hello, World!";
+
+        String text2=text.replaceAll(" ","");
+        System.out.println(text2);
+
+        String text3=text2.replaceAll("[^a-zA-Z]","");
+        System.out.println(text3);
+
+        String s ="";
+
+        for(int i=0; i<text3.length(); i++){
+        char a  = (charToOrd((charToOrd(text3.charAt(i))+4)%26));
+
+
+        s+=a;
+        }
+        System.out.println(s);
+
+
+        String [] hexStrings = new String[s.length()];
+
+        for(int i=0; i<s.length();i++){
+
+            hexStrings[i] = "0x"+Integer.toHexString(s.charAt(i));
+
+        }
+
+
+        System.out.println("Hex:");
+        for(int i =0; i<hexStrings.length; i++){
+
+            System.out.print(hexStrings[i]+" ");
+           
+        }
+
+        System.out.println();
+
+
+        ArrayList <String> evenThenOdd= new ArrayList<String>();
+
+        for(int i =0; i<hexStrings.length; i++){
+
+            if(i%2==0)
+            evenThenOdd.add(hexStrings[i]);
+
+        }
+
+        for(int i=0; i<hexStrings.length; i++){
+            if(i%2==1)
+            evenThenOdd.add(hexStrings[i]);
+        }
+
+
+
+        System.out.println("grouped");
+        for(int i =0; i<5; i++){
+        
+        System.out.print(evenThenOdd.get(i) +" ");
+        }
+        System.out.println();
+
+        for(int i=5; i<10;i++){
+        System.out.print(evenThenOdd.get(i)+" ");
+    
+        }
+
+        
+
+
+    }
+
+    
+
+
+    public static int charToOrd(char c) {
+        int value;
+        if (Character.isUpperCase(c)) 
+            value = (int)c - (int)'A';
+        else
+            value = (int)c - (int)'a';
+        assert value >= 0 : "Value too low";
+        assert value < 26 : "Value too large";
+        return value;
+    }
+
+
+
+    public static char charToOrd(int o) {
+        if ( (o < 0) || (o > 25) ) throw new IllegalArgumentException();
+        return (char)((o) + (int)'A');
+    }
+
+
+
+
+}
